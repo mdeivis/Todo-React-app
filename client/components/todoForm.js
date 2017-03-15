@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 class TodoForm extends React.Component {
 
@@ -137,5 +137,11 @@ class TodoForm extends React.Component {
         );
     }
 }
+
+TodoForm.propTypes = {
+    todo: PropTypes.object,
+    cancel: PropTypes.func,
+    deleteTodo: PropTypes.func
+};
 
 export default TodoForm;

@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+
+import TodoItem from 'components/todoItem';
 
 class TodosList extends React.Component {
 
@@ -17,36 +19,13 @@ class TodosList extends React.Component {
                 { !isTodosEmpty &&
                     <ul>
                         { todos && todos.map(todo => (
-                            <li key={ todo.id }>
-                                { !todo.isDone && <span>{ todo.name }</span> }
-                                { todo.isDone && <span><strike>{ todo.name }</strike></span> }
-                                &nbsp;
-                                { !todo.isDone &&
-                                    <i
-                                        onClick={ () => markAsComplete(todo) }
-                                        className="material-icons"
-                                    >
-                                        check_box_outline_blank
-                                    </i>
-                                }
-                                { todo.isDone &&
-                                    <i
-                                        onClick={ () => markAsIncomplete(todo) }
-                                        className="material-icons"
-                                    >
-                                        check_box
-                                    </i>
-                                }
-
-                                &nbsp;
-                                <i className="material-icons" onClick={ () => editTodo(todo) }>mode_edit</i>
-                                &nbsp;
-                               <i className="material-icons" onClick={ () => deleteTodo(todo.id) }>delete_forever</i>
-
-                                { todo.description &&
-                                    <div style={{fontStyle: 'italic'}} >{ todo.description }</div>
-                                }
-                            </li>
+                            <TodoItem key={ todo.id }
+                                todo={ todo }
+                                deleteTodo={ deleteTodo }
+                                markAsComplete={ markAsComplete }
+                                markAsIncomplete={ markAsIncomplete }
+                                editTodo={ editTodo }
+                            />
                         ))}
                     </ul>
                 }
@@ -56,5 +35,13 @@ class TodosList extends React.Component {
         );
     }
 }
+
+TodosList.propTypes = {
+    list: PropTypes.arrayOf(PropTypes.object),
+    deleteTodo: PropTypes.func,
+    markAsComplete: PropTypes.func,
+    markAsIncomplete: PropTypes.func,
+    editTodo: PropTypes.func
+};
 
 export default TodosList;

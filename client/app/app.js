@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import {render} from 'react-dom';
 
 import { POST, GET, DELETE, PUT } from 'services/request';
@@ -148,6 +148,11 @@ class App extends React.Component {
             </div>
         );
     }
+}
+
+App.propTpes = {
+    todos: PropTypes.arrayOf(PropTypes.object),
+    todo: PropTypes.object
 }
 
 render(<App/>, document.getElementById('app'));
